@@ -12,7 +12,7 @@ def alta_cliente(cliente: schemas.ClienteCreate):
     nuevo = services.crear(cliente)
     if nuevo is None:
         raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail=f"El número de contacto '{cliente.numero_contacto}' ya está registrado"
         )
     return nuevo
@@ -48,7 +48,7 @@ def actualizar_cliente(cliente: schemas.ClienteCreate, id: int = Path(..., gt=0)
     actualizado = services.actualizar_total(id, cliente)
     if actualizado is None:
         raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail=f"El número de contacto '{cliente.numero_contacto}' ya está registrado"
         )
     return actualizado
